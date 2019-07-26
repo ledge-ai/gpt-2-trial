@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-
+import argparse
 from pyknp import Juman
 from bert_juman import BertTokenizer, BertModel
 
@@ -87,7 +87,7 @@ def main(text):
     out = sample_sequence(
         model=bert_model,
         context=ids,
-        length=20,
+        length=80,
         temperature=1.0,
         top_k=0,
         top_p=0.9,
@@ -102,5 +102,8 @@ def main(text):
 
 
 if __name__ == "__main__":
-    text = "適用によって、効率的な暖房効果と環境への低負荷を両立させるためには、ヒートポンプがもっとも最適な方法と言われています"
-    main(text)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--inputText', type=str)
+    args = parser.parse_args()
+
+    main(args.inputText)
